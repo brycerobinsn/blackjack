@@ -7,6 +7,7 @@ const player = {
     chipCount: 0
 }
 const dealerHand = []
+const gameDeck = []
 const deckArr = [{
     value: 11,
     suit: 'Spade',
@@ -271,6 +272,17 @@ const deckArr = [{
 ]
 
 // functions
+// multiple decks
+function multiDeck (numDeck) {
+    for (idx = 0; idx < numDeck; idx++){
+       for (i = 0; i < deckArr.length; i++){
+            gameDeck.push(deckArr[i])
+            // console.log(`added card ${i}`)
+        }
+        // console.log(`Added Deck ${idx + 1}`)
+    }
+}
+
 // random number to find card value
 function randomCard () {
     const card =  Math.floor(Math.random() * (deckArr.length))
