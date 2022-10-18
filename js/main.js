@@ -282,13 +282,14 @@ function multiDeck (numDeck) {
         // console.log(`Added Deck ${idx + 1}`)
     }
 }
-
+multiDeck(1)
 // random number to find card value
 function randomCard () {
-    const card =  Math.floor(Math.random() * (deckArr.length))
+    const card =  Math.floor(Math.random() * (gameDeck.length))
     console.log(card)
-    return deckArr[card]
-    
+    gameDeck.splice(card,1)
+    return gameDeck[card]
+
 }
 // assign cards to each player alternating 
 function dealCards () {
