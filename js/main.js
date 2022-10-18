@@ -286,7 +286,7 @@ multiDeck(1)
 // random number to find card value
 function randomCard () {
     const card =  Math.floor(Math.random() * (gameDeck.length))
-    console.log(card)
+    // console.log(card)
     gameDeck.splice(card,1)
     return gameDeck[card]
 
@@ -294,18 +294,32 @@ function randomCard () {
 // assign cards to each player alternating 
 function dealCards () {
     player.hand.push(randomCard())
-    console.log(`Player hand: ${player.hand[0].value},`)
-    console.log(`Dealer has: `)
+    // console.log(`Player hand: ${player.hand[0].value},`)
+    // console.log(`Dealer has: `)
     dealerHand.push(randomCard())
-    console.log(`Player hand: ${player.hand[0].value}, `)
-    console.log(`Dealer has: ${dealerHand[0].value},`)
+    // console.log(`Player hand: ${player.hand[0].value}, `)
+    // console.log(`Dealer has: ${dealerHand[0].value},`)
     player.hand.push(randomCard())
-    console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
-    console.log(`Dealer has: ${dealerHand[0].value},`)
+    // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
+    // console.log(`Dealer has: ${dealerHand[0].value},`)
     dealerHand.push(randomCard())
-    console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
-    console.log(`Dealer has: ${dealerHand[0].value}, ${dealerHand[1].value}`)
+    // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
+    // console.log(`Dealer has: ${dealerHand[0].value}, ${dealerHand[1].value}`)
 }
 dealCards()
+// bust function
+function bust(cards) {
+    const sumHand = cards.reduce(function(acc,current){
+        return current.value + acc
+    }, 0)
+    console.log(sumHand)
+    if (sumHand > 10) {
+        console.log(`busted with ${sumHand}`)
+    }
+}
+bust(player.hand)
+
+// hit function
+
 
 // event listeners
