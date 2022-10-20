@@ -40,3 +40,6 @@ body {
     display: flex;
 
 }
+.bust {
+    background-color: red;
+}

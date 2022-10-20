@@ -1,7 +1,12 @@
 console.log('hello world')
 // select elements
+const dealBttn = document.getElementById('dealCards')
+const hitBttn = document.getElementById('hit')
+const standBttn = document.getElementById('stand')
+const dealScore = document.getElementById('dealerScore')
+const playScore = document.getElementById('playerScore')
 
-// variable declarations
+// variable declarations 
 const player = {
     hand: [],
     chipCount: 0
@@ -292,10 +297,14 @@ function randomCard () {
 
 }
 // score calculator
-function handScore (cards) {
-    return cards.reduce(function(acc,current){
+function handScore (cards, message) {
+    cards.reduce(function(acc,current){
         return current.value + acc
     },0)
+    message.innerHTML = cards.reduce(function(acc,current){
+        return current.value + acc
+    },0)
+
 }
 
 // assign cards to each player alternating 
@@ -303,31 +312,38 @@ function dealCards () {
     player.hand.push(randomCard())
     // console.log(`Player hand: ${player.hand[0].value},`)
     // console.log(`Dealer has: `)
+    handScore(player.hand, playScore)
     dealerHand.push(randomCard())
+    handScore(dealerHand, dealScore)
     // console.log(`Player hand: ${player.hand[0].value}, `)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     player.hand.push(randomCard())
+    handScore(player.hand, playScore)
     // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     dealerHand.push(randomCard())
-    // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
-    // console.log(`Dealer has: ${dealerHand[0].value}, ${dealerHand[1].value}`)
+    console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
+    console.log(`Dealer has: ${dealerHand[0].value}, ${dealerHand[1].value}`)
 }
-dealCards()
-console.log(handScore(player.hand))
 // bust function
-function bust(cards) {
+function bust(cards, message) {
     const sumHand = cards.reduce(function(acc,current){
         return current.value + acc
     }, 0)
-    console.log(sumHand)
     if (sumHand > 21) {
         console.log(`busted with ${sumHand}`)
+        message.innerHTML = `${sumHand} BUST`
+        message.classList.add('bust')
     }
 }
-bust(player.hand)
 
 // hit function
-
+function hit(){
+    player.hand.push(randomCard())
+    handScore(player.hand, playScore)
+    bust(player.hand, playScore)
+}
 
 // event listeners
+dealBttn.addEventListener('click',dealCards)
+hitBttn.addEventListener('click',hit)
