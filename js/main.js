@@ -291,6 +291,13 @@ function randomCard () {
     return gameDeck[card]
 
 }
+// score calculator
+function handScore (cards) {
+    return cards.reduce(function(acc,current){
+        return current.value + acc
+    },0)
+}
+
 // assign cards to each player alternating 
 function dealCards () {
     player.hand.push(randomCard())
@@ -307,13 +314,14 @@ function dealCards () {
     // console.log(`Dealer has: ${dealerHand[0].value}, ${dealerHand[1].value}`)
 }
 dealCards()
+console.log(handScore(player.hand))
 // bust function
 function bust(cards) {
     const sumHand = cards.reduce(function(acc,current){
         return current.value + acc
     }, 0)
     console.log(sumHand)
-    if (sumHand > 10) {
+    if (sumHand > 21) {
         console.log(`busted with ${sumHand}`)
     }
 }

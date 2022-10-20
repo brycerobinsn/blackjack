@@ -17,6 +17,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+.containerButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 .card {
     display: flex;
     justify-content: center;
@@ -30,4 +35,8 @@ body {
     margin: 5px;
     padding: 5px;
     border: 1px solid black;
+}
+#hit, #stand {
+    display: flex;
+
 }
