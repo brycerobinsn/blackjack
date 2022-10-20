@@ -5,7 +5,7 @@ const hitBttn = document.getElementById('hit')
 const standBttn = document.getElementById('stand')
 const dealScore = document.getElementById('dealerScore')
 const playScore = document.getElementById('playerScore')
-const hiddenCard = document.querySelector('.hiddenCard')
+// const hiddenCard = document.querySelector('.hiddenCard')
 const pFirstCard = document.getElementById('playerFirst')
 const pSecondCard = document.getElementById('playerSecond')
 const dFirstCard = document.getElementById('dealerFirst')
@@ -326,21 +326,21 @@ function scoreCard (cards, message) {
 
 // assign cards to each player alternating 
 function dealCards () {
+    // Reset the game
     player.hand.length = 0
     player.score = 0
     dealer.hand.length = 0
     dealer.score = 0
-    dealScore.innerHTML = `Dealer Score`
-    playScore.innerHTML = `Player Score`
-    // console.log(player.hand)
-    // console.log(dealer.hand)
+    dSecondCard.src = ''
+    dSecondCard.classList.add('.hiddenCard')
+    // Start deal
     player.hand.push(randomCard())
     pFirstCard.src = player.hand[0].img
     handScore(player)
     scoreCard(player, playScore)
     dealer.hand.push(randomCard())
-    handScore(dealer)
-    scoreCard(dealer,dealScore)
+    // handScore(dealer)
+    // scoreCard(dealer,dealScore)
     // console.log(`Player hand: ${player.hand[0].value}, `)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     player.hand.push(randomCard())
@@ -350,6 +350,7 @@ function dealCards () {
     // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     dealer.hand.push(randomCard())
+    dealScore.innerHTML = dealer.hand[1].value
     dFirstCard.src = dealer.hand[1].img
     console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     console.log(`Dealer has: ${dealer.hand[0].value}, ${dealer.hand[1].value}`)
@@ -414,7 +415,8 @@ function stand(){
     console.log(dealer.score)
     handScore(dealer)
     scoreCard(dealer, dealScore)
-    hiddenCard.classList.remove('hiddenCard')
+    dSecondCard.classList.remove('hiddenCard')
+    dSecondCard.src = dealer.hand[0].img
     dealerTurn()
 }
 

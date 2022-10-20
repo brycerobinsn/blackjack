@@ -40,6 +40,7 @@ button {
     width: 130px;
     height: 200px;
     background-color: whitesmoke;
+    border-radius: 25px;
 }
 #dealerScore, #playerScore {
     margin: 5px;
