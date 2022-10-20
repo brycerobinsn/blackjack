@@ -5,6 +5,7 @@ const hitBttn = document.getElementById('hit')
 const standBttn = document.getElementById('stand')
 const dealScore = document.getElementById('dealerScore')
 const playScore = document.getElementById('playerScore')
+const hiddenCard = document.querySelector('.hiddenCard')
 
 // variable declarations 
 const player = {
@@ -145,7 +146,7 @@ const deckArr = [{
     img: 'url here'
 },
 {
-    value: 1,
+    value: 11,
     suit: 'Diamond',
     img: 'url here'
 },
@@ -343,7 +344,30 @@ function hit(){
     handScore(player.hand, playScore)
     bust(player.hand, playScore)
 }
+// dealer hit
+function dealerHit(){
+    
+    dealerHand.push(randomCard())
+    handScore(dealerHand, dealScore)
+    bust(dealerHand, dealScore)
+}
+// decide winner
+// dealer play
+function dealerTurn (){
+    while (dealerHand.reduce(function(acc,current){
+        return current.value + acc
+    },0) <= 15) {
+        dealerHit()
+    }
+}
+// stand function
+function stand(){
+    handScore(dealerHand, dealScore)
+    hiddenCard.classList.remove('hiddenCard')
+    dealerTurn()
+}
 
 // event listeners
 dealBttn.addEventListener('click',dealCards)
 hitBttn.addEventListener('click',hit)
+standBttn.addEventListener('click', stand)
