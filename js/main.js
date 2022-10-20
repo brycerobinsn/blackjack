@@ -6,6 +6,10 @@ const standBttn = document.getElementById('stand')
 const dealScore = document.getElementById('dealerScore')
 const playScore = document.getElementById('playerScore')
 const hiddenCard = document.querySelector('.hiddenCard')
+const pFirstCard = document.getElementById('playerFirst')
+const pSecondCard = document.getElementById('playerSecond')
+const dFirstCard = document.getElementById('dealerFirst')
+const dSecondCard = document.getElementById('dealerSecond')
 
 // variable declarations 
 const player = {
@@ -331,7 +335,7 @@ function dealCards () {
     // console.log(player.hand)
     // console.log(dealer.hand)
     player.hand.push(randomCard())
-
+    pFirstCard.src = player.hand[0].img
     handScore(player)
     scoreCard(player, playScore)
     dealer.hand.push(randomCard())
@@ -340,11 +344,13 @@ function dealCards () {
     // console.log(`Player hand: ${player.hand[0].value}, `)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     player.hand.push(randomCard())
+    pSecondCard.src = player.hand[1].img
     handScore(player)
     scoreCard(player, playScore)
     // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     dealer.hand.push(randomCard())
+    dFirstCard.src = dealer.hand[1].img
     console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     console.log(`Dealer has: ${dealer.hand[0].value}, ${dealer.hand[1].value}`)
     console.log(`${player.score} is player score`)
