@@ -1,14 +1,23 @@
 body {
     background-color: purple;
 }
+button {
+    width: 100px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
 .container {
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
 }
 .containerCard {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    border: 1px solid black;
     
 }
 .containerScore {
@@ -20,7 +29,7 @@ body {
 .containerButton {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .card {
     display: flex;
@@ -30,6 +39,7 @@ body {
     margin: 5px;
     width: 150px;
     height: 250px;
+    background-color: whitesmoke;
 }
 #dealerScore, #playerScore {
     margin: 5px;
@@ -38,7 +48,7 @@ body {
 }
 #hit, #stand {
     display: flex;
-
+    background-color: green;
 }
 .bust {
     background-color: red;

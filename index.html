@@ -10,9 +10,11 @@
 </head>
 <body>
     <h1>Black Jack</h1>
-    <button id="dealCards">Deal</button>
     <div class="container">
         <div class="containerCard">
+            <ul class="dealerHits">
+                
+            </ul>
             <div id="dealerFirst" class="card">dealer card1</div>
             <div id="dealerSecond" class="card hiddenCard">dealer card2</div>
         </div>
@@ -21,11 +23,15 @@
             <div id="playerScore">Player Score</div>
         </div>
         <div class="containerCard">
+            <ul class="playerHits">
+                
+            </ul>
             <div id="playerSecond" class="card">player card2</div>
             <div id="playerFirst" class="card">player card1</div>
         </div>
         <div class="containerButton">
             <button id="hit">Hit</button>
+            <button id="dealCards">Deal</button>
             <button id="stand">Stand</button>
         </div>
     </div>
