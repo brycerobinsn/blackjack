@@ -10,9 +10,14 @@ const hiddenCard = document.querySelector('.hiddenCard')
 // variable declarations 
 const player = {
     hand: [],
-    chipCount: 0
+    chipCount: 0,
+    score: 0
 }
-const dealerHand = []
+const dealer = {
+    hand:[],
+    chipCount: 0,
+    score: 0
+}
 const gameDeck = []
 const deckArr = [{
     value: 11,
@@ -299,42 +304,54 @@ function randomCard () {
 }
 // score calculator
 function handScore (cards) {
-    cards.reduce(function(acc,current){
+    // for(let i = 0; i < cards.hand.length; i++){
+    //     cards.score += cards.hand[i].value
+    // }
+    // return cards.score
+    const score = cards.hand.reduce(function(acc,current){
+        console.log(`current value ${current.value}`)
+        cards.score += current.value
         return current.value + acc
     },0)
+    console.log(cards.score)
+    return cards.score = score
 }
 function scoreCard (cards, message) {
-    message.innerHTML = cards.reduce(function(acc,current){
-        return current.value + acc
-    },0)
+    message.innerHTML = cards.score
 }
 
 // assign cards to each player alternating 
 function dealCards () {
     player.hand.length = 0
-    dealerHand.length = 0
+    player.score = 0
+    dealer.hand.length = 0
+    dealer.score = 0
     dealScore.innerHTML = `Dealer Score`
     playScore.innerHTML = `Player Score`
-    console.log(player.hand)
-    console.log(dealerHand)
+    // console.log(player.hand)
+    // console.log(dealer.hand)
     player.hand.push(randomCard())
-    // console.log(`Player hand: ${player.hand[0].value},`)
-    // console.log(`Dealer has: `)
-    handScore(player.hand)
-    scoreCard(player.hand, playScore)
-    dealerHand.push(randomCard())
-    handScore(dealerHand)
-    scoreCard(dealerHand,dealScore)
+
+    handScore(player)
+    scoreCard(player, playScore)
+    dealer.hand.push(randomCard())
+    handScore(dealer)
+    scoreCard(dealer,dealScore)
     // console.log(`Player hand: ${player.hand[0].value}, `)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     player.hand.push(randomCard())
-    handScore(player.hand)
-    scoreCard(player.hand, playScore)
+    handScore(player)
+    scoreCard(player, playScore)
     // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
-    dealerHand.push(randomCard())
+    dealer.hand.push(randomCard())
     console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
-    console.log(`Dealer has: ${dealerHand[0].value}, ${dealerHand[1].value}`)
+    console.log(`Dealer has: ${dealer.hand[0].value}, ${dealer.hand[1].value}`)
+    console.log(`${player.score} is player score`)
+}
+// ace value change
+function aceCheck(){
+    console.log('ace')
 }
 // bust function
 function bust(cards, message) {
@@ -351,33 +368,34 @@ function bust(cards, message) {
 // hit function
 function hit(){
     player.hand.push(randomCard())
-    handScore(player.hand)
-    scoreCard(player.hand, playScore)
+    handScore(player)
+    scoreCard(player, playScore)
     bust(player.hand, playScore)
 }
 // dealer hit
 function dealerHit(){
     
-    dealerHand.push(randomCard())
-    handScore(dealerHand)
-    scoreCard(dealerHand, dealScore)
-    bust(dealerHand, dealScore)
+    dealer.hand.push(randomCard())
+    console.log(`dealer hit`)
+    handScore(dealer)
+    scoreCard(dealer, dealScore)
+    bust(dealer.hand, dealScore)
 }
 // decide winner
 function decideWinner () {
-    if (handScore(player.hand) > handScore(dealerHand)){
-        console.log('Player Wins!')
-    } else if(handScore(player.hand) < handScore(dealerHand)) {
+    if (player.score > dealer.score && player.score <= 21){
+        console.log('Player wins!')
+        console.log(`player score: ${player.score} dealer score: ${dealer.score}`)
+    } else if(player.score < dealer.score && dealer.score <= 21) {
         console.log('House wins!')
+        console.log(`player score: ${player.score} dealer score: ${dealer.score}`)
     } else {
-        console.log('push')
-        console.log(parseInt(handScore((player.hand))))
-        console.log(handScore(dealerHand))
+        console.log(`${player.score} versus ${dealer.score}`)
     }
 }
 // dealer play
 function dealerTurn (){
-    while (dealerHand.reduce(function(acc,current){
+    while (dealer.hand.reduce(function(acc,current){
         return current.value + acc
     },0) <= 15) {
         dealerHit()
@@ -386,8 +404,10 @@ function dealerTurn (){
 }
 // stand function
 function stand(){
-    handScore(dealerHand)
-    scoreCard(dealerHand, dealScore)
+    console.log(player.score)
+    console.log(dealer.score)
+    handScore(dealer)
+    scoreCard(dealer, dealScore)
     hiddenCard.classList.remove('hiddenCard')
     dealerTurn()
 }
