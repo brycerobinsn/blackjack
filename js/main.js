@@ -298,28 +298,38 @@ function randomCard () {
 
 }
 // score calculator
-function handScore (cards, message) {
+function handScore (cards) {
     cards.reduce(function(acc,current){
         return current.value + acc
     },0)
+}
+function scoreCard (cards, message) {
     message.innerHTML = cards.reduce(function(acc,current){
         return current.value + acc
     },0)
-
 }
 
 // assign cards to each player alternating 
 function dealCards () {
+    player.hand.length = 0
+    dealerHand.length = 0
+    dealScore.innerHTML = `Dealer Score`
+    playScore.innerHTML = `Player Score`
+    console.log(player.hand)
+    console.log(dealerHand)
     player.hand.push(randomCard())
     // console.log(`Player hand: ${player.hand[0].value},`)
     // console.log(`Dealer has: `)
-    handScore(player.hand, playScore)
+    handScore(player.hand)
+    scoreCard(player.hand, playScore)
     dealerHand.push(randomCard())
-    handScore(dealerHand, dealScore)
+    handScore(dealerHand)
+    scoreCard(dealerHand,dealScore)
     // console.log(`Player hand: ${player.hand[0].value}, `)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     player.hand.push(randomCard())
-    handScore(player.hand, playScore)
+    handScore(player.hand)
+    scoreCard(player.hand, playScore)
     // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     // console.log(`Dealer has: ${dealerHand[0].value},`)
     dealerHand.push(randomCard())
@@ -341,17 +351,30 @@ function bust(cards, message) {
 // hit function
 function hit(){
     player.hand.push(randomCard())
-    handScore(player.hand, playScore)
+    handScore(player.hand)
+    scoreCard(player.hand, playScore)
     bust(player.hand, playScore)
 }
 // dealer hit
 function dealerHit(){
     
     dealerHand.push(randomCard())
-    handScore(dealerHand, dealScore)
+    handScore(dealerHand)
+    scoreCard(dealerHand, dealScore)
     bust(dealerHand, dealScore)
 }
 // decide winner
+function decideWinner () {
+    if (handScore(player.hand) > handScore(dealerHand)){
+        console.log('Player Wins!')
+    } else if(handScore(player.hand) < handScore(dealerHand)) {
+        console.log('House wins!')
+    } else {
+        console.log('push')
+        console.log(parseInt(handScore((player.hand))))
+        console.log(handScore(dealerHand))
+    }
+}
 // dealer play
 function dealerTurn (){
     while (dealerHand.reduce(function(acc,current){
@@ -359,10 +382,12 @@ function dealerTurn (){
     },0) <= 15) {
         dealerHit()
     }
+    decideWinner()
 }
 // stand function
 function stand(){
-    handScore(dealerHand, dealScore)
+    handScore(dealerHand)
+    scoreCard(dealerHand, dealScore)
     hiddenCard.classList.remove('hiddenCard')
     dealerTurn()
 }
