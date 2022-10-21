@@ -9,6 +9,7 @@ button {
     justify-content: center;
     align-items: center;
     margin: 10px;
+    border-radius: 25px;
 }
 .container {
     display: flex;
@@ -28,6 +29,12 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+#playerScore, #dealerScore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
 }
 .containerButton {
     display: flex;
