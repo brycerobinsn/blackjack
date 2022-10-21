@@ -9,7 +9,10 @@
     <script defer src="js/main.js"></script>
 </head>
 <body>
-    <h1>Black Jack</h1>
+    <header>
+        <h1>Black Jack </h1>
+        <button id="rules">Rules</button>
+    </header>
     <div class="container">
         <div id="containerDealer" class="container">
             <ul id="dealerHits">
@@ -25,7 +28,7 @@
         </div>
         <div id="containerPlayer" class="container">
             <ul id="playerHits">
-                
+
             </ul>
             <img id="playerSecond" class="card" src="/img/cardBackPurple.png">
             <img id="playerFirst" class="card" src="/img/cardBackPurple.png">
@@ -37,6 +40,30 @@
             <button id="dealCards">Deal</button>
             <button id="stand">Stand</button>
         </div>
+    </div>
+    <div id="rulePop" class="show">
+        <h3>Rules of Black Jack</h3>
+        <ul>
+            <li>The goal of the game is to have a higher total than your opponent without going over 21</li>
+            <li>All number cards score as their indicated value</li>
+            <li>Face cards score as 10</li>
+            <li>Aces score can score as either 1 or 11</li>
+            <li>The player receives both of their cards face up</li>
+            <li>The dealer has one face up one face down card</li>
+            <li>The players have the option to HIT or STAND on their turn</li>
+            <li>HIT: The player adds another card to their hand</li>
+            <li>if the value of their hand exceeds 21 they BUST</li>
+            <li>STAND: When a player does not wish to draw anymore cards they STAND. STANDing immediately ends the players turn</li>
+            <li>STAND: When a player does not wish to draw anymore cards they STAND</li>
+            <li>BUSTing is when a player or dealer hand value exceeds 21 resulting in a loss</li>
+            <li>BlackJack is earned when a player or dealer receive an ACE and 10 value card in their intial hand</li>
+            <li>if the player hand is higher than the dealer hand the player wins</li>
+            <li>if the dealer hand is higher than the player hand the dealer wins</li>
+            <li>if the hands are equal this results in a PUSH or tie</li>
+            <li> CLICK RULES BUTTON TO CLOSE</li>
+            
+
+        </ul>
     </div>
 </body>
 </html>

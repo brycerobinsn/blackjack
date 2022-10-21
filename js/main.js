@@ -1,5 +1,6 @@
 
 // select elements
+const ruleBttn = document.getElementById(`rules`)
 const dealBttn = document.getElementById('dealCards')
 const hitBttn = document.getElementById('hit')
 const standBttn = document.getElementById('stand')
@@ -473,8 +474,13 @@ function stand(){
     dSecondCard.src = dealer.hand[0].img
     dealerTurn()
 }
-
+// rule popout
+function rulePopOut () {
+    const popout = document.getElementById(`rulePop`)
+    popout.classList.toggle('show')
+}
 // event listeners
 dealBttn.addEventListener('click',dealCards)
 hitBttn.addEventListener('click',hit)
 standBttn.addEventListener('click', stand)
+ruleBttn.addEventListener('click', rulePopOut)
