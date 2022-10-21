@@ -314,7 +314,6 @@ function randomCard () {
 function handScore (cards) {
 
     const score = cards.hand.reduce(function(acc,current){
-        console.log(`current value ${current.value}`)
         cards.score += current.value
         return current.value + acc
     },0)
@@ -338,7 +337,7 @@ function gameReset() {
     playerText.innerHTML = ''
     dealerText.innerHTML= ''
     divs.forEach(function(undo) {
-        undo.classList.remove(`push`, `loser`)
+        undo.classList.remove(`push`, `loser`,`bust`)
     })
     
 }
@@ -359,20 +358,30 @@ function dealCards () {
     dealer.hand.push(randomCard())
     dealScore.innerHTML = 'Score: ' + dealer.hand[1].value
     dFirstCard.src = dealer.hand[1].img
+    if(handScore(player) == 21 || handScore(dealer) == 21){
+        decideWinner()
+    }
     console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     console.log(`Dealer has: ${dealer.hand[0].value}, ${dealer.hand[1].value}`)
     console.log(`${player.score} is player score`)
 }
-// ace value change
-function aceCheck(){
-    console.log('ace')
+// ace value find
+function aceCheck(cards){
+    if(cards.find((card) => card.value == 11)) {
+        return true
+    }
+    return false
+    
 }
 // bust function
 function bust(cards, message) {
     const sumHand = cards.reduce(function(acc,current){
         return current.value + acc
     }, 0)
-    if (sumHand > 21) {
+    if (sumHand > 21 && aceCheck(cards) === true ){
+        const aceIdx = cards.findIndex((card) => card.value == 11)
+        cards[aceIdx].value = 1
+    } else if (sumHand > 21) {
         console.log(`busted with ${sumHand}`)
         message.innerHTML = `${sumHand} BUST`
         message.classList.add('bust')
@@ -412,7 +421,9 @@ function decideWinner () {
     } else {
         dealerText.innerHTML = 'PUSH'
         playerText.innerHTML = 'PUSH'
-        mainContainer.classList.add('push')
+        document.getElementById(`containerDealer`).classList.add('push')
+        document.getElementById(`containerPlayer`).classList.add('push')
+
         console.log(`${player.score} versus ${dealer.score}`)
     }
 }
