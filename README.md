@@ -1,4 +1,5 @@
 # Black Jack
+## Getting Started
 
 ## Background information
 - Game Choice: BlackJack
@@ -26,7 +27,7 @@
 ## Wireframe
 ![Black Jack Wireframe](img/Screen%20Shot%202022-10-13%20at%201.48.57%20PM.png)
 
-### PseudoCode
+## PseudoCode
 ```
     const player = {
         hand = [],
@@ -81,3 +82,16 @@
     - redeal current hand         
 
 ```
+### Game Play Screen Shots
+- Rules Pop Out Button
+![Black Jack Rules](img/RulePopout.png)
+- Start Screen
+![basicPlay](img/basicPlay.png)
+- Multiple Cards
+![Multi hit](img/MultiCard.png)
+- Win Lose
+![winner](img/WinLose.png)
+### Technologies Used
+- HTML, CSS, JavaScript
+- Deck sourced from https://code.google.com/archive/p/vector-playing-cards/
+### 
