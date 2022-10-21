@@ -19,13 +19,14 @@ ul{
 .container {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    
 }
 #containerPlayer, #containerDealer {
     display: flex;
     flex-direction: row;
     justify-content: center;
     border: 1px solid black;
+    border-radius: 10px;
     
 }
 

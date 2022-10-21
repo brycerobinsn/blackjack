@@ -15,6 +15,7 @@ const loserClass = document.querySelector('loser')
 const divs = document.querySelectorAll('div')
 
 
+
 // variable declarations 
 const player = {
     hand: [],
@@ -317,7 +318,7 @@ function handScore (cards) {
         cards.score += current.value
         return current.value + acc
     },0)
-    console.log(cards.score)
+    // console.log(cards.score)
     return cards.score = score
 }
 function scoreCard (cards, message) {
@@ -390,7 +391,12 @@ function bust(cards, message) {
 
 // hit function
 function hit(){
+    const liEl = document.createElement(`li`)
+    const imgEl = document.createElement('img')
     player.hand.push(randomCard())
+    imgEl.src = player.hand[player.hand.length - 1].src
+    liEl.appendChild(imgEl)
+    document.getElementById('playerHits').appendChild(liEl)
     handScore(player)
     scoreCard(player, playScore)
     bust(player.hand, playScore)
