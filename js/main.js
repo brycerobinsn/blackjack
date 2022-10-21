@@ -13,7 +13,8 @@ const dFirstCard = document.getElementById('dealerFirst')
 const dSecondCard = document.getElementById('dealerSecond')
 const loserClass = document.querySelector('loser')
 const divs = document.querySelectorAll('div')
-
+const ulPlayer = document.getElementById('playerHits')
+const ulDealer = document.getElementById('dealerHits')
 
 
 // variable declarations 
@@ -324,6 +325,13 @@ function handScore (cards) {
 function scoreCard (cards, message) {
     message.innerHTML = `Score: ` + cards.score
 }
+// remove excess cards
+function hitCardRemover(hitCard) {
+    const extraCards = document.getElementsByClassName(hitCard)
+    while(extraCards.length > 0) {
+        extraCards[0].parentNode.removeChild(extraCards[0])
+    }
+}
 // reset game 
 function gameReset() {
     player.hand.length = 0
@@ -337,6 +345,7 @@ function gameReset() {
     dSecondCard.classList.add('.hiddenCard')
     playerText.innerHTML = ''
     dealerText.innerHTML= ''
+    hitCardRemover('hitCard')
     divs.forEach(function(undo) {
         undo.classList.remove(`push`, `loser`,`bust`)
     })
@@ -394,17 +403,26 @@ function hit(){
     const liEl = document.createElement(`li`)
     const imgEl = document.createElement('img')
     player.hand.push(randomCard())
-    imgEl.src = player.hand[player.hand.length - 1].src
+    //append card to board
+    imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
+    imgEl.setAttribute('class', 'hitCard')
     liEl.appendChild(imgEl)
-    document.getElementById('playerHits').appendChild(liEl)
+    document.getElementById('playerHits').appendChild(imgEl)
     handScore(player)
     scoreCard(player, playScore)
     bust(player.hand, playScore)
 }
 // dealer hit
 function dealerHit(){
+    const liEl = document.createElement(`li`)
+    const imgEl = document.createElement('img')
     
     dealer.hand.push(randomCard())
+    //append card to board
+    imgEl.setAttribute('src', dealer.hand[dealer.hand.length -1].img)
+    imgEl.setAttribute('class', 'hitCard')
+    liEl.appendChild(imgEl)
+    document.getElementById('dealerHits').appendChild(imgEl)
     console.log(`dealer hit`)
     handScore(dealer)
     scoreCard(dealer, dealScore)
