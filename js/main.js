@@ -1,4 +1,4 @@
-console.log('hello world')
+
 // select elements
 const dealBttn = document.getElementById('dealCards')
 const hitBttn = document.getElementById('hit')
@@ -371,9 +371,7 @@ function dealCards () {
     if(handScore(player) == 21 || handScore(dealer) == 21){
         decideWinner()
     }
-    console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
-    console.log(`Dealer has: ${dealer.hand[0].value}, ${dealer.hand[1].value}`)
-    console.log(`${player.score} is player score`)
+
 }
 // ace value find
 function aceCheck(cards){
@@ -392,7 +390,6 @@ function bust(cards, message) {
         const aceIdx = cards.findIndex((card) => card.value == 11)
         cards[aceIdx].value = 1
     } else if (sumHand > 21) {
-        console.log(`busted with ${sumHand}`)
         message.innerHTML = `${sumHand} BUST`
         message.classList.add('bust')
     }
@@ -423,7 +420,7 @@ function dealerHit(){
     imgEl.setAttribute('class', 'hitCard')
     liEl.appendChild(imgEl)
     document.getElementById('dealerHits').appendChild(imgEl)
-    console.log(`dealer hit`)
+    
     handScore(dealer)
     scoreCard(dealer, dealScore)
     bust(dealer.hand, dealScore)
@@ -431,24 +428,23 @@ function dealerHit(){
 // decide winner
 function decideWinner () {
     if (player.score > dealer.score && player.score <= 21){
-        console.log('Player wins!')
+        
         playerText.innerHTML = `You Win!`
         document.getElementById(`containerPlayer`).classList.add(`push`)
         document.getElementById('containerDealer').classList.add('loser')
-        console.log(`player score: ${player.score} dealer score: ${dealer.score}`)
+        
     } else if(player.score < dealer.score && dealer.score <= 21) {
-        console.log('House wins!')
+
         dealerText.innerHTML = `House Wins!`
         document.getElementById(`containerDealer`).classList.add('push')
         document.getElementById('containerPlayer').classList.add('loser')
-        console.log(`player score: ${player.score} dealer score: ${dealer.score}`)
+
     } else {
         dealerText.innerHTML = 'PUSH'
         playerText.innerHTML = 'PUSH'
         document.getElementById(`containerDealer`).classList.add('push')
         document.getElementById(`containerPlayer`).classList.add('push')
 
-        console.log(`${player.score} versus ${dealer.score}`)
     }
 }
 // dealer play
@@ -462,8 +458,6 @@ function dealerTurn (){
 }
 // stand function
 function stand(){
-    console.log(player.score)
-    console.log(dealer.score)
     handScore(dealer)
     scoreCard(dealer, dealScore)
     dSecondCard.classList.remove('hiddenCard')
