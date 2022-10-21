@@ -1,6 +1,6 @@
 # Black Jack
 ## Getting Started
-
+- https://brycerobinsn.github.io/blackjack/
 ## Background information
 - Game Choice: BlackJack
 - The goal of the game is to have a higher total than your opponent without going over 21
@@ -94,4 +94,10 @@
 ### Technologies Used
 - HTML, CSS, JavaScript
 - Deck sourced from https://code.google.com/archive/p/vector-playing-cards/
-### 
+### Next Steps
+- Add Betting 
+- Money Tracking
+    - How much house has won against you
+- Choose number of decks
+    - display remaining cards in deck
+- Changable Themes
