@@ -298,16 +298,15 @@ function multiDeck (numDeck) {
     for (idx = 0; idx < numDeck; idx++){
        for (i = 0; i < deckArr.length; i++){
             gameDeck.push(deckArr[i])
-            // console.log(`added card ${i}`)
+
         }
-        // console.log(`Added Deck ${idx + 1}`)
+
     }
 }
 multiDeck(1)
 // random number to find card value
 function randomCard () {
     const card =  Math.floor(Math.random() * (gameDeck.length))
-    // console.log(card)
     gameDeck.splice(card,1)
     return gameDeck[card]
 
@@ -319,7 +318,6 @@ function handScore (cards) {
         cards.score += current.value
         return current.value + acc
     },0)
-    // console.log(cards.score)
     return cards.score = score
 }
 function scoreCard (cards, message) {
@@ -381,7 +379,7 @@ function aceCheck(cards){
     return false
     
 }
-// bust function
+// bust function changes ace value as well
 function bust(cards, message) {
     const sumHand = cards.reduce(function(acc,current){
         return current.value + acc
@@ -392,6 +390,9 @@ function bust(cards, message) {
     } else if (sumHand > 21) {
         message.innerHTML = `${sumHand} BUST`
         message.classList.add('bust')
+        return true
+    } else {
+        return false
     }
 }
 
@@ -407,7 +408,11 @@ function hit(){
     document.getElementById('playerHits').appendChild(imgEl)
     handScore(player)
     scoreCard(player, playScore)
-    bust(player.hand, playScore)
+    if (bust(player.hand, playScore) === true){
+        dealerText.innerHTML = `House Wins!`
+        document.getElementById(`containerDealer`).classList.add('push')
+        document.getElementById('containerPlayer').classList.add('loser')
+    }
 }
 // dealer hit
 function dealerHit(){
@@ -423,7 +428,11 @@ function dealerHit(){
     
     handScore(dealer)
     scoreCard(dealer, dealScore)
-    bust(dealer.hand, dealScore)
+    if (bust(dealer.hand, dealScore) === true) {
+        playerText.innerHTML = `You Win!`
+        document.getElementById(`containerPlayer`).classList.add(`push`)
+        document.getElementById('containerDealer').classList.add('loser')
+    }
 }
 // decide winner
 function decideWinner () {
@@ -439,7 +448,7 @@ function decideWinner () {
         document.getElementById(`containerDealer`).classList.add('push')
         document.getElementById('containerPlayer').classList.add('loser')
 
-    } else {
+    } else if (player.score == dealer.score){
         dealerText.innerHTML = 'PUSH'
         playerText.innerHTML = 'PUSH'
         document.getElementById(`containerDealer`).classList.add('push')
