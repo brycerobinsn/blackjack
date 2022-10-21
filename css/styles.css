@@ -2,7 +2,6 @@ body {
     background-color: #588157;
     color: #dad7cd;
 }
-
 button {
     width: 100px;
     height: 50px;
@@ -10,6 +9,12 @@ button {
     align-items: center;
     margin: 10px;
     border-radius: 25px;
+}
+h2 {
+    margin-left: auto;
+}
+ul{
+    margin-right: auto;
 }
 .container {
     display: flex;
@@ -62,7 +67,7 @@ button {
     display: flex;
     background-color: #3a5a40;
     color: #dad7cd;
-
+    
 }
 #dealCards {
     background-color: #a3b18a;

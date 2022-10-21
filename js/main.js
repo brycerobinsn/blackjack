@@ -312,10 +312,7 @@ function randomCard () {
 }
 // score calculator
 function handScore (cards) {
-    // for(let i = 0; i < cards.hand.length; i++){
-    //     cards.score += cards.hand[i].value
-    // }
-    // return cards.score
+
     const score = cards.hand.reduce(function(acc,current){
         console.log(`current value ${current.value}`)
         cards.score += current.value
@@ -325,7 +322,7 @@ function handScore (cards) {
     return cards.score = score
 }
 function scoreCard (cards, message) {
-    message.innerHTML = cards.score
+    message.innerHTML = `Score: ` + cards.score
 }
 // reset game 
 function gameReset() {
@@ -340,6 +337,9 @@ function gameReset() {
     dSecondCard.classList.add('.hiddenCard')
     playerText.innerHTML = ''
     dealerText.innerHTML= ''
+    divs.forEach(function(undo) {
+        undo.classList.remove(`push`, `loser`)
+    })
     
 }
 // assign cards to each player alternating 
@@ -352,18 +352,12 @@ function dealCards () {
     handScore(player)
     scoreCard(player, playScore)
     dealer.hand.push(randomCard())
-    // handScore(dealer)
-    // scoreCard(dealer,dealScore)
-    // console.log(`Player hand: ${player.hand[0].value}, `)
-    // console.log(`Dealer has: ${dealerHand[0].value},`)
     player.hand.push(randomCard())
     pSecondCard.src = player.hand[1].img
     handScore(player)
     scoreCard(player, playScore)
-    // console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
-    // console.log(`Dealer has: ${dealerHand[0].value},`)
     dealer.hand.push(randomCard())
-    dealScore.innerHTML = dealer.hand[1].value
+    dealScore.innerHTML = 'Score: ' + dealer.hand[1].value
     dFirstCard.src = dealer.hand[1].img
     console.log(`Player hand: ${player.hand[0].value}, ${player.hand[1].value}`)
     console.log(`Dealer has: ${dealer.hand[0].value}, ${dealer.hand[1].value}`)
