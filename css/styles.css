@@ -1,6 +1,8 @@
 body {
-    background-color: purple;
+    background-color: #588157;
+    color: #dad7cd;
 }
+
 button {
     width: 100px;
     height: 50px;
@@ -13,13 +15,14 @@ button {
     flex-direction: column;
     border: 1px solid black;
 }
-.containerCard {
+#containerPlayer, #containerDealer {
     display: flex;
     flex-direction: row;
     justify-content: center;
     border: 1px solid black;
     
 }
+
 .containerScore {
     display: flex;
     flex-direction: column;
@@ -39,8 +42,9 @@ button {
     margin: 5px;
     width: 130px;
     height: 200px;
-    background-color: whitesmoke;
+    background-color: #a3b18a;
     border-radius: 25px;
+    
 }
 #dealerScore, #playerScore {
     margin: 5px;
@@ -49,11 +53,24 @@ button {
 }
 #hit, #stand {
     display: flex;
-    background-color: green;
+    background-color: #3a5a40;
+    color: #dad7cd;
+
+}
+#dealCards {
+    background-color: #a3b18a;
+    color: #344e41;
 }
 .bust {
     background-color: red;
 }
 .hiddenCard {
     background-color:black;
+}
+.loser {
+    background-color: #e63946;
+    color: #dad7cd;
+}
+.push {
+    background-color: #344e41;
 }

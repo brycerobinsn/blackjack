@@ -5,11 +5,15 @@ const hitBttn = document.getElementById('hit')
 const standBttn = document.getElementById('stand')
 const dealScore = document.getElementById('dealerScore')
 const playScore = document.getElementById('playerScore')
-// const hiddenCard = document.querySelector('.hiddenCard')
 const pFirstCard = document.getElementById('playerFirst')
 const pSecondCard = document.getElementById('playerSecond')
+const dealerText = document.getElementById('dealerText')
+const playerText = document.getElementById('playerText')
 const dFirstCard = document.getElementById('dealerFirst')
 const dSecondCard = document.getElementById('dealerSecond')
+const loserClass = document.querySelector('loser')
+const divs = document.querySelectorAll('div')
+
 
 // variable declarations 
 const player = {
@@ -323,16 +327,25 @@ function handScore (cards) {
 function scoreCard (cards, message) {
     message.innerHTML = cards.score
 }
-
-// assign cards to each player alternating 
-function dealCards () {
-    // Reset the game
+// reset game 
+function gameReset() {
     player.hand.length = 0
     player.score = 0
     dealer.hand.length = 0
     dealer.score = 0
-    dSecondCard.src = ''
+    dSecondCard.src = `img/cardBackPurple.png`
+    dFirstCard.src = `img/cardBackPurple.png`
+    pFirstCard.src = `img/cardBackPurple.png`
+    pSecondCard.src = `img/cardBackPurple.png`
     dSecondCard.classList.add('.hiddenCard')
+    playerText.innerHTML = ''
+    dealerText.innerHTML= ''
+    
+}
+// assign cards to each player alternating 
+function dealCards () {
+    // Reset the game
+    gameReset()
     // Start deal
     player.hand.push(randomCard())
     pFirstCard.src = player.hand[0].img
@@ -392,11 +405,20 @@ function dealerHit(){
 function decideWinner () {
     if (player.score > dealer.score && player.score <= 21){
         console.log('Player wins!')
+        playerText.innerHTML = `You Win!`
+        document.getElementById(`containerPlayer`).classList.add(`push`)
+        document.getElementById('containerDealer').classList.add('loser')
         console.log(`player score: ${player.score} dealer score: ${dealer.score}`)
     } else if(player.score < dealer.score && dealer.score <= 21) {
         console.log('House wins!')
+        dealerText.innerHTML = `House Wins!`
+        document.getElementById(`containerDealer`).classList.add('push')
+        document.getElementById('containerPlayer').classList.add('loser')
         console.log(`player score: ${player.score} dealer score: ${dealer.score}`)
     } else {
+        dealerText.innerHTML = 'PUSH'
+        playerText.innerHTML = 'PUSH'
+        mainContainer.classList.add('push')
         console.log(`${player.score} versus ${dealer.score}`)
     }
 }

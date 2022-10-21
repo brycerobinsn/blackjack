@@ -11,23 +11,25 @@
 <body>
     <h1>Black Jack</h1>
     <div class="container">
-        <div class="containerCard">
+        <div id="containerDealer" class="container">
             <ul class="dealerHits">
                 
             </ul>
-            <img id="dealerFirst" class="card" src="">
-            <img id="dealerSecond" class="card hiddenCard" src="">
+            <img id="dealerFirst" class="card" src="img/cardBackPurple.png">
+            <img id="dealerSecond" class="card" src="img/cardBackPurple.png">
+            <h2 id="dealerText"></h2>
         </div>
         <div class="containerScore">
             <div id="dealerScore">Dealer Score</div>
             <div id="playerScore">Player Score</div>
         </div>
-        <div class="containerCard">
+        <div id="containerPlayer" class="container">
             <ul class="playerHits">
                 
             </ul>
-            <img id="playerSecond" class="card" src="">
-            <img id="playerFirst" class="card" src="">
+            <img id="playerSecond" class="card" src="/img/cardBackPurple.png">
+            <img id="playerFirst" class="card" src="/img/cardBackPurple.png">
+            <h2 id="playerText"></h2>
         </div>
         <div class="containerButton">
             <button id="hit">Hit</button>
