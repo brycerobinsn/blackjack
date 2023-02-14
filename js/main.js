@@ -401,18 +401,21 @@ function bust(cards, message) {
 function hit(){
     const liEl = document.createElement(`li`)
     const imgEl = document.createElement('img')
-    player.hand.push(randomCard())
-    //append card to board
-    imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
-    imgEl.setAttribute('class', 'hitCard')
-    liEl.appendChild(imgEl)
-    document.getElementById('playerHits').appendChild(imgEl)
     handScore(player)
-    scoreCard(player, playScore)
-    if (bust(player.hand, playScore) === true){
-        dealerText.innerHTML = `House Wins!`
-        document.getElementById(`containerDealer`).classList.add('push')
-        document.getElementById('containerPlayer').classList.add('loser')
+    if(player.score > 0 && player.score <= 21){
+        player.hand.push(randomCard())
+        //append card to board
+        imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
+        imgEl.setAttribute('class', 'hitCard')
+        liEl.appendChild(imgEl)
+        document.getElementById('playerHits').appendChild(imgEl)
+        handScore(player)
+        scoreCard(player, playScore)
+        if (bust(player.hand, playScore) === true){
+            dealerText.innerHTML = `House Wins!`
+            document.getElementById(`containerDealer`).classList.add('push')
+            document.getElementById('containerPlayer').classList.add('loser')
+        }
     }
 }
 // dealer hit
