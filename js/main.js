@@ -177,7 +177,7 @@ function hit(){
         player.hand.push(randomCard())
         //append card to board
         imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
-        imgEl.setAttribute('class', 'hitCard')
+        imgEl.setAttribute('class', 'hitCard card-animation')
         liEl.appendChild(imgEl)
         document.getElementById('playerHits').appendChild(imgEl)
         handScore(player)
@@ -197,7 +197,7 @@ function dealerHit(){
     dealer.hand.push(randomCard())
     //append card to board
     imgEl.setAttribute('src', dealer.hand[dealer.hand.length -1].img)
-    imgEl.setAttribute('class', 'hitCard')
+    imgEl.setAttribute('class', 'hitCard card-animation')
     liEl.appendChild(imgEl)
     document.getElementById('dealerHits').appendChild(imgEl)
     
