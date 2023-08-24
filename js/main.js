@@ -18,6 +18,7 @@ const ulDealer = document.getElementById('dealerHits')
 
 
 // variable declarations 
+let handInProgress = false;
 const player = {
     hand: [],
     chipCount: 0,
@@ -123,21 +124,25 @@ function gameReset() {
 }
 // assign cards to each player alternating 
 function dealCards () {
+    handInProgress = true;
     // Reset the game
     gameReset()
     // Start deal
     player.hand.push(randomCard())
     pFirstCard.src = player.hand[0].img
+    pFirstCard.classList.add('card-animation');
     handScore(player)
     scoreCard(player, playScore)
     dealer.hand.push(randomCard())
     player.hand.push(randomCard())
     pSecondCard.src = player.hand[1].img
+    pSecondCard.classList.add('card-animation');
     handScore(player)
     scoreCard(player, playScore)
     dealer.hand.push(randomCard())
     dealScore.innerHTML = 'Score: ' + dealer.hand[1].value
     dFirstCard.src = dealer.hand[1].img
+    dFirstCard.classList.add('card-animation');
     if(handScore(player) == 21 || handScore(dealer) == 21){
         decideWinner()
     }
@@ -170,23 +175,26 @@ function bust(cards, message) {
 
 // hit function
 function hit(){
-    const liEl = document.createElement(`li`)
-    const imgEl = document.createElement('img')
-    handScore(player)
-    if(player.score > 0 && player.score <= 21){
-        player.hand.push(randomCard())
-        //append card to board
-        imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
-        imgEl.setAttribute('class', 'hitCard card-animation')
-        liEl.appendChild(imgEl)
-        document.getElementById('playerHits').appendChild(imgEl)
+    if(handInProgress) {
+        const liEl = document.createElement(`li`)
+        const imgEl = document.createElement('img')
         handScore(player)
-        scoreCard(player, playScore)
-        if (bust(player.hand, playScore) === true){
-            dealerText.innerHTML = `House Wins!`
-            document.getElementById(`containerDealer`).classList.add('push')
-            document.getElementById('containerPlayer').classList.add('loser')
+        if(player.score > 0 && player.score <= 21){
+            player.hand.push(randomCard())
+            //append card to board
+            imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
+            imgEl.setAttribute('class', 'hitCard card-animation')
+            liEl.appendChild(imgEl)
+            document.getElementById('playerHits').appendChild(imgEl)
+            handScore(player)
+            scoreCard(player, playScore)
+            if (bust(player.hand, playScore) === true){
+                dealerText.innerHTML = `House Wins!`
+                document.getElementById(`containerDealer`).classList.add('push')
+                document.getElementById('containerPlayer').classList.add('loser')
+            }
         }
+    return;
     }
 }
 // dealer hit
@@ -211,6 +219,7 @@ function dealerHit(){
 }
 // decide winner
 function decideWinner () {
+    handInProgress = false;
     if (player.score > dealer.score && player.score <= 21){
         
         playerText.innerHTML = `You Win!`
