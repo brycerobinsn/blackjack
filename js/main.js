@@ -156,43 +156,45 @@ function aceCheck(cards){
     return false
     
 }
+function endGameWithBust() {
+    dealerText.innerHTML = "House Wins!";
+    document.getElementById("containerDealer").classList.add("push");
+    document.getElementById("containerPlayer").classList.add("loser");
+}
 // bust function changes ace value as well
 function bust(cards, message) {
     const sumHand = cards.reduce(function(acc,current){
-        return current.value + acc
+        return current.value + acc;
     }, 0)
     if (sumHand > 21 && aceCheck(cards) === true ){
-        const aceIdx = cards.findIndex((card) => card.value == 11)
-        cards[aceIdx].value = 1
+        const aceIdx = cards.findIndex((card) => card.value == 11);
+        cards[aceIdx].value = 1;
     } else if (sumHand > 21) {
-        message.innerHTML = `${sumHand} BUST`
-        message.classList.add('bust')
-        return true
+        message.innerHTML = `${sumHand} BUST`;
+        message.classList.add('bust');
+        endGameWithBust();
+        return true;
     } else {
-        return false
+        return false;
     }
 }
 
 // hit function
 function hit(){
     if(handInProgress) {
-        const liEl = document.createElement(`li`)
-        const imgEl = document.createElement('img')
-        handScore(player)
+        const liEl = document.createElement(`li`);
+        const imgEl = document.createElement('img');
+        handScore(player);
         if(player.score > 0 && player.score <= 21){
-            player.hand.push(randomCard())
+            player.hand.push(randomCard());
             //append card to board
-            imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
-            imgEl.setAttribute('class', 'hitCard card-animation')
-            liEl.appendChild(imgEl)
-            document.getElementById('playerHits').appendChild(imgEl)
-            handScore(player)
-            scoreCard(player, playScore)
-            if (bust(player.hand, playScore) === true){
-                dealerText.innerHTML = `House Wins!`
-                document.getElementById(`containerDealer`).classList.add('push')
-                document.getElementById('containerPlayer').classList.add('loser')
-            }
+            imgEl.setAttribute('src', player.hand[player.hand.length -1].img);
+            imgEl.setAttribute('class', 'hitCard card-animation');
+            liEl.appendChild(imgEl);
+            document.getElementById('playerHits').appendChild(imgEl);
+            handScore(player);
+            scoreCard(player, playScore);
+            bust(player.hand, playScore);
         }
     return;
     }
