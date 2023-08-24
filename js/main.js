@@ -1,4 +1,3 @@
-
 // select elements
 const ruleBttn = document.getElementById(`rules`)
 const dealBttn = document.getElementById('dealCards')
@@ -19,6 +18,7 @@ const ulDealer = document.getElementById('dealerHits')
 
 
 // variable declarations 
+let handInProgress = false;
 const player = {
     hand: [],
     chipCount: 0,
@@ -30,286 +30,58 @@ const dealer = {
     score: 0
 }
 const gameDeck = []
-const deckArr = [{
-    value: 11,
-    suit: 'Spade',
-    img: `img/SVG-cards-1.3/ace_of_spades.svg`
-
-},
-{
-    value: 2,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/2_of_spades.svg'
-},
-{
-    value: 3,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/3_of_spades.svg'
-},
-{
-    value: 4,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/4_of_spades.svg'
-},
-{
-    value: 5,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/5_of_spades.svg'
-},
-{
-    value: 6,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/6_of_spades.svg'
-},
-{
-    value: 7,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/7_of_spades.svg'
-},
-{
-    value: 8,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/8_of_spades.svg'
-},
-{
-    value: 9,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/9_of_spades.svg'
-},
-{
-    value: 10,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/10_of_spades.svg'
-},
-{
-    value: 10,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/jack_of_spades.svg'
-},
-{
-    value: 10,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/queen_of_spades.svg'
-},
-{
-    value: 10,
-    suit:'Spade',
-    img: 'img/SVG-cards-1.3/king_of_spades.svg'
-},
-{
-    value: 11,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/ace_of_clubs.svg'
-},
-{
-    value: 2,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/2_of_clubs.svg'
-},
-{
-    value: 3,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/3_of_clubs.svg'
-},
-{
-    value: 4,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/4_of_clubs.svg'
-},
-{
-    value: 5,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/5_of_clubs.svg'
-},
-{
-    value: 6,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/6_of_clubs.svg'
-},
-{
-    value: 7,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/7_of_clubs.svg'
-},
-{
-    value: 8,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/8_of_clubs.svg'
-},
-{
-    value: 9,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/9_of_clubs.svg'
-},
-{
-    value: 10,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/10_of_clubs.svg'
-},
-{
-    value: 10,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/jack_of_clubs.svg'
-},
-{
-    value: 10,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/queen_of_clubs.svg'
-},
-{
-    value: 10,
-    suit: 'Club',
-    img: 'img/SVG-cards-1.3/king_of_clubs.svg'
-},
-{
-    value: 11,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/ace_of_diamonds.svg'
-},
-{
-    value: 2,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/2_of_diamonds.svg'
-},
-{
-    value: 3,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/3_of_diamonds.svg'
-},
-{
-    value: 4,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/4_of_diamonds.svg'
-},
-{
-    value: 5,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/5_of_diamonds.svg'
-},
-{
-    value: 6,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/6_of_diamonds.svg'
-},
-{
-    value: 7,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/7_of_diamonds.svg'
-},
-{
-    value: 8,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/8_of_diamonds.svg'
-},
-{
-    value: 9,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/9_of_diamonds.svg'
-},
-{
-    value: 10,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/10_of_diamonds.svg'
-},
-{
-    value: 10,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/jack_of_diamonds.svg'
-},
-{
-    value: 10,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/queen_of_diamonds.svg'
-},
-{
-    value: 10,
-    suit: 'Diamond',
-    img: 'img/SVG-cards-1.3/king_of_diamonds.svg'
-},
-{
-    value: 11,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/ace_of_hearts.svg'
-},
-{
-    value: 2,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/2_of_hearts.svg'
-},
-{
-    value: 3,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/3_of_hearts.svg'
-},
-{
-    value: 4,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/4_of_hearts.svg'
-},
-{
-    value: 5,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/5_of_hearts.svg'
-},
-{
-    value: 6,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/6_of_hearts.svg'
-},
-{
-    value: 7,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/7_of_hearts.svg'
-},
-{
-    value: 8,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/8_of_hearts.svg'
-},
-{
-    value: 9,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/9_of_hearts.svg'
-},
-{
-    value: 10,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/10_of_hearts.svg'
-},
-{
-    value: 10,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/jack_of_hearts.svg'
-},
-{
-    value: 10,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/queen_of_hearts.svg'
-},
-{
-    value: 10,
-    suit: 'Heart',
-    img: 'img/SVG-cards-1.3/king_of_hearts.svg'
-},
-]
 
 // functions
+// create deck
+function createDeck() {
+    const suits = ['Spades', 'Clubs', 'Diamonds', 'Hearts'];
+    const values = [
+        { value: 11, name: 'ace'},
+        { value: 2, name: '2'},
+        { value: 3, name: '3'},
+        { value: 4, name: '4'},
+        { value: 5, name: '5'},
+        { value: 6, name: '6'},
+        { value: 7, name: '7'},
+        { value: 8, name: '8'},
+        { value: 9, name: '9'},
+        { value: 10, name: '10'},
+        { value: 10, name: 'jack'},
+        { value: 10, name: 'queen'},
+        { value: 10, name: 'king'},
+    ];
+
+    const deckArr = [];
+
+    suits.forEach((suit) => {
+        values.forEach((cardValue) => {
+            const card = {
+                value: cardValue.value,
+                suit: suit,
+                img: `img/SVG-cards-1.3/${cardValue.name}_of_${suit.toLowerCase()}.svg`
+            };
+            deckArr.push(card);
+        })
+    })
+    return deckArr;
+}
+
+const deckArr = createDeck();
 // multiple decks
 function multiDeck (numDeck) {
-    for (idx = 0; idx < numDeck; idx++){
-       for (i = 0; i < deckArr.length; i++){
-            gameDeck.push(deckArr[i])
-
+    for (let idx = 0; idx < numDeck; idx++){
+       for (let i = 0; i < deckArr.length; i++){
+            gameDeck.push(deckArr[i]);
         }
-
     }
 }
 multiDeck(1)
 // random number to find card value
 function randomCard () {
-    const card =  Math.floor(Math.random() * (gameDeck.length))
-    gameDeck.splice(card,1)
-    return gameDeck[card]
+    const cardIndex = Math.floor(Math.random() * gameDeck.length);
+    const card = gameDeck[cardIndex];
+    gameDeck.splice(cardIndex, 1);
+    return card;
 
 }
 // score calculator
@@ -352,21 +124,25 @@ function gameReset() {
 }
 // assign cards to each player alternating 
 function dealCards () {
+    handInProgress = true;
     // Reset the game
     gameReset()
     // Start deal
     player.hand.push(randomCard())
     pFirstCard.src = player.hand[0].img
+    pFirstCard.classList.add('card-animation');
     handScore(player)
     scoreCard(player, playScore)
     dealer.hand.push(randomCard())
     player.hand.push(randomCard())
     pSecondCard.src = player.hand[1].img
+    pSecondCard.classList.add('card-animation');
     handScore(player)
     scoreCard(player, playScore)
     dealer.hand.push(randomCard())
     dealScore.innerHTML = 'Score: ' + dealer.hand[1].value
     dFirstCard.src = dealer.hand[1].img
+    dFirstCard.classList.add('card-animation');
     if(handScore(player) == 21 || handScore(dealer) == 21){
         decideWinner()
     }
@@ -399,20 +175,26 @@ function bust(cards, message) {
 
 // hit function
 function hit(){
-    const liEl = document.createElement(`li`)
-    const imgEl = document.createElement('img')
-    player.hand.push(randomCard())
-    //append card to board
-    imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
-    imgEl.setAttribute('class', 'hitCard')
-    liEl.appendChild(imgEl)
-    document.getElementById('playerHits').appendChild(imgEl)
-    handScore(player)
-    scoreCard(player, playScore)
-    if (bust(player.hand, playScore) === true){
-        dealerText.innerHTML = `House Wins!`
-        document.getElementById(`containerDealer`).classList.add('push')
-        document.getElementById('containerPlayer').classList.add('loser')
+    if(handInProgress) {
+        const liEl = document.createElement(`li`)
+        const imgEl = document.createElement('img')
+        handScore(player)
+        if(player.score > 0 && player.score <= 21){
+            player.hand.push(randomCard())
+            //append card to board
+            imgEl.setAttribute('src', player.hand[player.hand.length -1].img)
+            imgEl.setAttribute('class', 'hitCard card-animation')
+            liEl.appendChild(imgEl)
+            document.getElementById('playerHits').appendChild(imgEl)
+            handScore(player)
+            scoreCard(player, playScore)
+            if (bust(player.hand, playScore) === true){
+                dealerText.innerHTML = `House Wins!`
+                document.getElementById(`containerDealer`).classList.add('push')
+                document.getElementById('containerPlayer').classList.add('loser')
+            }
+        }
+    return;
     }
 }
 // dealer hit
@@ -423,7 +205,7 @@ function dealerHit(){
     dealer.hand.push(randomCard())
     //append card to board
     imgEl.setAttribute('src', dealer.hand[dealer.hand.length -1].img)
-    imgEl.setAttribute('class', 'hitCard')
+    imgEl.setAttribute('class', 'hitCard card-animation')
     liEl.appendChild(imgEl)
     document.getElementById('dealerHits').appendChild(imgEl)
     
@@ -437,6 +219,7 @@ function dealerHit(){
 }
 // decide winner
 function decideWinner () {
+    handInProgress = false;
     if (player.score > dealer.score && player.score <= 21){
         
         playerText.innerHTML = `You Win!`
@@ -454,7 +237,6 @@ function decideWinner () {
         playerText.innerHTML = 'PUSH'
         document.getElementById(`containerDealer`).classList.add('push')
         document.getElementById(`containerPlayer`).classList.add('push')
-
     }
 }
 // dealer play

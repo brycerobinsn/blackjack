@@ -1,5 +1,17 @@
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) ;
+        opacity: 1;
+    }
+}
+.card-animation {
+    animation: slideIn 0.5s ease-out;
+}
 body {
-
     background-color: #588157;
     color: #dad7cd;
 }
@@ -29,6 +41,9 @@ ul{
 .container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100rem;
     
 }
 
@@ -39,6 +54,7 @@ ul{
     align-items: center;
     border: 1px solid black;
     border-radius: 10px;
+    max-width: 700px;
     
 }
 
