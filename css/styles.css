@@ -50,18 +50,19 @@ ul{
 #containerPlayer, #containerDealer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    border-radius: 10px;
-    max-width: 700px;
+    justify-content: space-around;
     
+    border-radius: 10px;
+    
+    margin: 0 auto;
 }
 
 .containerScore {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 #playerScore, #dealerScore {
     display: flex;
@@ -71,20 +72,20 @@ ul{
 }
 #playerHits, #dealerHits {
     display: flex;
-    align-self: flex-end;
-
+    flex-direction: row;
 }
 .containerButton {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    position: relative;
 }
 .card, .hitCard {
     display: flex;
     justify-content: center;
     border: 1px solid black;
     padding: 10px;
-    margin: 5px;
+    margin: 5px 2px;
     width: 130px;
     height: 200px;
     background-color: #a3b18a;
@@ -131,4 +132,10 @@ ul{
 }
 .show {
     display: none;
+}
+.cards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
