@@ -86,12 +86,19 @@ function randomCard () {
 }
 // score calculator
 function handScore (cards) {
-
-    const score = cards.hand.reduce(function(acc,current){
-        cards.score += current.value
-        return current.value + acc
-    },0)
-    return cards.score = score
+    let score = 0;
+    let aceCount = 0
+    // calculate score and count number of aces
+    cards.hand.forEach((card) => {
+        score += card.value;
+        if (card.value === 11) aceCount += 1;
+    });
+    while (score > 21 && aceCount > 0) {
+        score -= 10;
+        aceCount -= 1;
+    }
+    cards.score = score;
+    return score;
 }
 function scoreCard (cards, message) {
     message.innerHTML = `Score: ` + cards.score
